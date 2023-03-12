@@ -1,0 +1,17 @@
+{
+  "name": "todo-fullstack",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Danny Lam <danny.lam@dlam.com.au>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend",
+    "packages/*"
+  ],
+  "scripts": {
+    "start": "yarn --cwd backend start",
+    "build": "yarn --cwd frontend start"
+  }
+}

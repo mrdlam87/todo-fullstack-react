@@ -1,0 +1,23 @@
+.check-input {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+
+  label {
+    font-size: 1.6rem;
+    font-weight: 600;
+  }
+
+  input {
+    width: 2.4rem;
+    height: 2.4rem;
+    cursor: pointer;
+  }
+
+  .check-icon {
+    width: 3.2rem;
+    height: 3.2rem;
+    cursor: pointer;
+    color: #0b1b32;
+  }
+}

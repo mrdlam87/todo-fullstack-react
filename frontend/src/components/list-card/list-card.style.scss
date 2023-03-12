@@ -1,0 +1,37 @@
+.list-card {
+  background-color: #0b1b32;
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+  padding: 2.4rem;
+  box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.4);
+  border-radius: 11px;
+  overflow: hidden;
+  height: 30rem;
+
+  .title-bar {
+    color: #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    letter-spacing: 2px;
+  }
+
+  .title-icon {
+    width: 3.2rem;
+    height: 3.2rem;
+    color: #41c8f4;
+    cursor: pointer;
+  }
+
+  .list-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    padding: 1.6rem;
+    border-radius: 6px;
+    background-color: #ddd;
+    overflow: auto;
+  }
+}
