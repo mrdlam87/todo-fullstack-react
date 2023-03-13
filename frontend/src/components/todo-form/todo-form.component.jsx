@@ -22,11 +22,10 @@ const TodoForm = ({ user, todo, edit }) => {
 
   const [formData, setFormData] = useState({
     id: todo ? todo.id : lastIndex() + 1,
-    description: todo ? todo.description : "",
+    name: todo ? todo.name : "",
     dateCreated: todo ? todo.dateCreated : getFormattedDate(new Date()),
     dateCompleted: todo ? todo.dateCompleted : "",
     complete: todo ? todo.complete : false,
-    userId: user.id,
   });
 
   const onCancelHandler = async () => {
@@ -44,7 +43,7 @@ const TodoForm = ({ user, todo, edit }) => {
         await addUserTodo(formData);
       } else {
         // PUT
-        todo.description = formData.description;
+        todo.name = formData.name;
         todo.dateCompleted = formData.dateCompleted;
         todo.complete = formData.complete;
         updateUserTodo(todo);
@@ -84,8 +83,8 @@ const TodoForm = ({ user, todo, edit }) => {
       <TextInput
         label="Description"
         placeholderText="Enter Todo description"
-        value={formData.description}
-        onChange={inputChangeHandler.bind(this, "description")}
+        value={formData.name}
+        onChange={inputChangeHandler.bind(this, "name")}
       />
       <DatePicker
         label="Date Completed"

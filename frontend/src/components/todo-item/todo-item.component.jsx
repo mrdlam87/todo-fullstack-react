@@ -7,7 +7,7 @@ import TodoForm from "../todo-form/todo-form.component";
 import "./todo-item.style.scss";
 
 const TodoItem = ({ todo }) => {
-  const { description, complete } = todo;
+  const { name, complete } = todo;
   const { currentUser, updateUserTodo } = useContext(UserContext);
   const { setModal, setFormType } = useContext(UIContext);
 
@@ -29,7 +29,7 @@ const TodoItem = ({ todo }) => {
     <div className="item-container">
       <div className="list-label-container">
         <CheckInput checked={complete} onClick={onCheckClick} />
-        <h3 className={`list-label ${completedClassName}`}>{description}</h3>
+        <h3 className={`list-label ${completedClassName}`}>{name}</h3>
       </div>
       <p onClick={onEditClick}>EDIT</p>
     </div>

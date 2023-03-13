@@ -23,9 +23,25 @@ interface UserDoc extends mongoose.Document {
 }
 
 const todoSchema = new mongoose.Schema({
+  id: {
+    type: Number,
+    required: [true, "A todo must have an ID."],
+  },
   name: {
     type: String,
     required: [true, "A todo must have a description."],
+  },
+  dateCreated: {
+    type: String,
+    default: "",
+  },
+  dateCompleted: {
+    type: String,
+    default: "",
+  },
+  complete: {
+    type: Boolean,
+    default: false,
   },
 });
 

@@ -8,8 +8,7 @@ const UserForm = ({ user, edit }) => {
   const { setModal } = useContext(UIContext);
   const { addUser, updateUser, deleteUser } = useContext(UserContext);
   const [formData, setFormData] = useState({
-    // id: user ? user.id : users[users.length - 1].id + 1,
-    fullName: user ? user.fullName : "",
+    name: user ? user.name : "",
     todos: user ? user.todos : [],
   });
 
@@ -30,7 +29,7 @@ const UserForm = ({ user, edit }) => {
         await addUser(formData);
       } else {
         // PUT
-        user.fullName = formData.fullName;
+        user.name = formData.name;
         await updateUser(user);
       }
       setModal(false);
@@ -58,8 +57,8 @@ const UserForm = ({ user, edit }) => {
       <TextInput
         label="Full Name"
         placeholderText="Enter full name"
-        value={formData.fullName}
-        onChange={inputChangeHandler.bind(this, "fullName")}
+        value={formData.name}
+        onChange={inputChangeHandler.bind(this, "name")}
       />
     </Form>
   );

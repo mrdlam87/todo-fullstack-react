@@ -5,7 +5,7 @@ import UserForm from "../user-form/user-form.component";
 import "./user-item.style.scss";
 
 const UserItem = ({ user }) => {
-  const { fullName } = user;
+  const { name } = user;
   const { currentUser, setCurrentUser } = useContext(UserContext);
   const { setModal, setFormType } = useContext(UIContext);
 
@@ -24,7 +24,7 @@ const UserItem = ({ user }) => {
         className={`user-item ${selectedClassName}`}
         onClick={() => setCurrentUser(user)}
       >
-        {fullName}
+        {name}
       </h3>
       <p onClick={onEditClick}>EDIT</p>
     </div>

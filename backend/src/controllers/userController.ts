@@ -9,9 +9,7 @@ export const getAllUsers = async (req: Request, res: Response) => {
     });
 
     res.status(200).json({
-      status: "success",
-      results: users.length,
-      data: { users: usersDto },
+      users: usersDto,
     });
   } catch (error) {
     res.status(404).json({
@@ -26,12 +24,9 @@ export const getUser = async (req: Request, res: Response) => {
 
   try {
     res.status(200).json({
-      status: "success",
-      data: {
-        id: user.id,
-        name: user.name,
-        todos: user.todos,
-      },
+      id: user.id,
+      name: user.name,
+      todos: user.todos,
     });
   } catch (error) {
     res.status(404).json({
@@ -46,12 +41,9 @@ export const createUser = async (req: Request, res: Response) => {
     const user = await User.create(req.body);
 
     res.status(201).json({
-      status: "success",
-      data: {
-        id: user.id,
-        name: user.name,
-        todos: user.todos,
-      },
+      id: user.id,
+      name: user.name,
+      todos: user.todos,
     });
   } catch (error) {
     res.status(404).json({
@@ -69,12 +61,9 @@ export const updateUser = async (req: Request, res: Response) => {
     });
 
     res.status(200).json({
-      status: "success",
-      data: {
-        id: user.id,
-        name: user.name,
-        todos: user.todos,
-      },
+      id: user.id,
+      name: user.name,
+      todos: user.todos,
     });
   } catch (error) {
     res.status(404).json({
@@ -90,7 +79,6 @@ export const deleteUser = async (req: Request, res: Response) => {
 
     res.status(204).json({
       status: "success",
-      data: null,
     });
   } catch (error) {
     res.status(404).json({

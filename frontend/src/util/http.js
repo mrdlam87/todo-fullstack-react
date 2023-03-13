@@ -1,50 +1,29 @@
 import axios from "axios";
 
-const BACKEND_URL =
-  "https://user-todos-default-rtdb.asia-southeast1.firebasedatabase.app/";
-
-// const BACKEND_API_URL = "http://127.0.0.1:5086";
+// const BACKEND_URL =
+//   "https://user-todos-default-rtdb.asia-southeast1.firebasedatabase.app/";
+const BACKEND_URL = "http://127.0.0.1:3000/api";
 
 export const fetchUsers = async () => {
-  // const response = await axios.get(BACKEND_API_URL + "/users");
+  const response = await axios.get(BACKEND_URL + "/users");
 
-  // return response.data;
-
-  const response = await axios.get(BACKEND_URL + "/users.json");
-
-  const users = [];
-
-  for (const key in response.data) {
-    const user = {
-      id: key,
-      fullName: response.data[key].fullName,
-      todos: response.data[key].todos ?? [],
-    };
-
-    users.push(user);
-  }
-
-  return users;
+  return response.data.users;
 };
 
 export const postUser = async (userData) => {
-  const response = await axios.post(BACKEND_URL + "/users.json", userData);
+  const response = await axios.post(BACKEND_URL + "/users", userData);
 
   // returns ID name from Fireabase
-  return response.data.name;
+  return response.data.id;
 };
 
 export const putUser = async (id, userData) =>
-  axios.put(BACKEND_URL + `/users/${id}.json`, userData);
+  axios.put(BACKEND_URL + `/users/${id}`, userData);
 
-export const delUser = async (id) =>
-  axios.delete(BACKEND_URL + `/users/${id}.json`);
+export const delUser = async (id) => axios.delete(BACKEND_URL + `/users/${id}`);
 
 export const fetchUserTodos = async (id) => {
-  // const response = await axios.get(BACKEND_API_URL + `/users/${userId}/todos`);
-
-  // return response.data;
-  const response = await axios.get(BACKEND_URL + `/users/${id}.json`);
+  const response = await axios.get(BACKEND_URL + `/users/${id}`);
 
   return response.data.todos ?? [];
 };
