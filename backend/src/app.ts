@@ -1,13 +1,13 @@
 import express from "express";
-import { Request, Response } from "express";
 import morgan from "morgan";
+import { userRouter } from "./routes/userRoutes";
 
 const app = express();
 
+app.use(express.json());
 app.use(morgan("dev"));
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("Application works!");
-});
+// Routes
+app.use("/api/users", userRouter);
 
 export default app;
