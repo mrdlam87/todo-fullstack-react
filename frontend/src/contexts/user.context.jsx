@@ -170,7 +170,6 @@ export const UserProvider = ({ children }) => {
     const loadUserTodos = async () => {
       try {
         const data = await fetchUserTodos(currentUser.id);
-        console.log(0);
         setCurrentUserTodos(data);
       } catch (error) {
         console.log("Failed to fetch todos");

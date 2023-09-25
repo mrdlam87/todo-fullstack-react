@@ -2,6 +2,7 @@ import express from "express";
 import morgan from "morgan";
 import cors from "cors";
 import { userRouter } from "./routes/userRoutes";
+import { errorHandler } from "./controllers/errorController";
 
 const app = express();
 
@@ -17,5 +18,7 @@ app.use(morgan("dev"));
 
 // Routes
 app.use("/api/users", userRouter);
+
+app.use(errorHandler);
 
 export default app;

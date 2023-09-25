@@ -1,7 +1,5 @@
 import axios from "axios";
 
-// const BACKEND_URL =
-//   "https://user-todos-default-rtdb.asia-southeast1.firebasedatabase.app/";
 const BACKEND_URL = "http://127.0.0.1:3000/api";
 
 export const fetchUsers = async () => {
@@ -13,7 +11,6 @@ export const fetchUsers = async () => {
 export const postUser = async (userData) => {
   const response = await axios.post(BACKEND_URL + "/users", userData);
 
-  // returns ID name from Fireabase
   return response.data.id;
 };
 
