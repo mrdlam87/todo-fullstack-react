@@ -19,18 +19,18 @@ export const getAllUserTodos = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const user = req.params.userId;
 
-    const userDoc = await User.findById(user);
+    const userDoc = await User.findById(user).populate({ path: "todos" });
 
     if (!userDoc) {
       return next(new AppError("No user found with that ID", 404));
     }
 
-    const doc = await Todo.find({ user });
+    const todos: ITodo[] = userDoc["todos"];
 
     res.status(200).json({
       status: "success",
-      results: doc.length,
-      data: doc,
+      results: todos.length,
+      data: todos,
     });
   }
 );

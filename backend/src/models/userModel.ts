@@ -14,8 +14,15 @@ const userSchema = new Schema(
   { toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
 
+userSchema.virtual("todos", {
+  ref: "Todo",
+  foreignField: "user",
+  localField: "_id",
+});
+
 userSchema.pre("find", function (next) {
   this.select("-__v");
+  this.set("toObject", { virtuals: true });
   next();
 });
 

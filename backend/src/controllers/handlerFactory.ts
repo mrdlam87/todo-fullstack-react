@@ -1,6 +1,6 @@
 import catchAsync from "../utils/catchAsync";
 import AppError from "../utils/appError";
-import { Model, Document } from "mongoose";
+import { Model, Document, PopulateOptions } from "mongoose";
 import { Request, Response, NextFunction } from "express";
 
 type DocumentType<T extends Document> = T;
@@ -16,9 +16,18 @@ export const getAll = <T extends Document>(Model: Model<DocumentType<T>>) =>
     });
   });
 
-export const getOne = <T extends Document>(Model: Model<DocumentType<T>>) =>
+export const getOne = <T extends Document>(
+  Model: Model<DocumentType<T>>,
+  popOptions: PopulateOptions = null
+) =>
   catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-    const doc = await Model.findById(req.params.id);
+    let query = Model.findById(req.params.id);
+
+    if (popOptions) {
+      query = query.populate(popOptions);
+    }
+
+    const doc = await query;
 
     if (!doc) {
       return next(new AppError("No document found with that ID", 404));
