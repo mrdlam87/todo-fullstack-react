@@ -1,26 +1,54 @@
-import axios from "axios";
+import smartHttp from "./smartHttp";
 
 const BACKEND_URL = "http://127.0.0.1:3000/api";
 
 export const fetchUsers = async () => {
-  const response = await axios.get(BACKEND_URL + "/users");
+  const response = await smartHttp.get(BACKEND_URL + "/users");
 
-  return response.data.users;
+  return response.data.data;
 };
 
 export const postUser = async (userData) => {
-  const response = await axios.post(BACKEND_URL + "/users", userData);
+  const response = await smartHttp.post(BACKEND_URL + "/users", userData);
 
-  return response.data.id;
+  return response.data.data;
 };
 
-export const putUser = async (id, userData) =>
-  axios.put(BACKEND_URL + `/users/${id}`, userData);
+export const putUser = async (id, userData) => {
+  const response = await smartHttp.patch(
+    BACKEND_URL + `/users/${id}`,
+    userData
+  );
 
-export const delUser = async (id) => axios.delete(BACKEND_URL + `/users/${id}`);
+  return response.data.data;
+};
+
+export const delUser = async (id) =>
+  smartHttp.del(BACKEND_URL + `/users/${id}`);
 
 export const fetchUserTodos = async (id) => {
-  const response = await axios.get(BACKEND_URL + `/users/${id}`);
+  const response = await smartHttp.get(BACKEND_URL + `/users/${id}/todos`);
 
-  return response.data.todos ?? [];
+  return response.data.data ?? [];
 };
+
+export const postUserTodo = async (id, todoData) => {
+  const response = await smartHttp.post(
+    BACKEND_URL + `/users/${id}/todos`,
+    todoData
+  );
+
+  return response.data.data;
+};
+
+export const putUserTodo = async (id, todoId, todoData) => {
+  const response = await smartHttp.patch(
+    BACKEND_URL + `/users/${id}/todos/${todoId}`,
+    todoData
+  );
+
+  return response.data.data;
+};
+
+export const delUserTodo = async (id, todoId) =>
+  smartHttp.del(BACKEND_URL + `/users/${id}/todos/${todoId}`);

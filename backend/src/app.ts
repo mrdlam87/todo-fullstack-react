@@ -3,6 +3,7 @@ import morgan from "morgan";
 import cors from "cors";
 import { userRouter } from "./routes/userRoutes";
 import { errorHandler } from "./controllers/errorController";
+import { todoRouter } from "./routes/todoRoutes";
 
 const app = express();
 

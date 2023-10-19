@@ -13,6 +13,6 @@ const userRouter = express.Router();
 userRouter.use("/:userId/todos", todoRouter);
 
 userRouter.route("/").get(getAllUsers).post(createUser);
-userRouter.route("/:id").get(getUser).put(updateUser).delete(deleteUser);
+userRouter.route("/:id").get(getUser).patch(updateUser).delete(deleteUser);
 
 export { userRouter };

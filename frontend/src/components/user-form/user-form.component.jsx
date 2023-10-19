@@ -3,10 +3,12 @@ import { UIContext } from "../../contexts/ui.context";
 import { UserContext } from "../../contexts/user.context";
 import Form from "../form/form.component";
 import TextInput from "../text-input/text-input.component";
+import { TodoContext } from "../../contexts/todo.context";
 
 const UserForm = ({ user, edit }) => {
   const { setModal } = useContext(UIContext);
   const { addUser, updateUser, deleteUser } = useContext(UserContext);
+  const { clearTodos } = useContext(TodoContext);
   const [formData, setFormData] = useState({
     name: user ? user.name : "",
     todos: user ? user.todos : [],
@@ -16,9 +18,9 @@ const UserForm = ({ user, edit }) => {
     try {
       // DELETE
       if (edit) {
-        await deleteUser(user.id);
+        await deleteUser(user);
+        clearTodos();
       }
-      console.log("Failed to update user");
       setModal(false);
     } catch (error) {}
   };

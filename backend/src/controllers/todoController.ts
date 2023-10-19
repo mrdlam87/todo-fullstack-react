@@ -19,7 +19,10 @@ export const getAllUserTodos = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const user = req.params.userId;
 
-    const userDoc = await User.findById(user).populate({ path: "todos" });
+    const userDoc = await User.findById(user).populate({
+      path: "todos",
+      select: "-__v",
+    });
 
     if (!userDoc) {
       return next(new AppError("No user found with that ID", 404));

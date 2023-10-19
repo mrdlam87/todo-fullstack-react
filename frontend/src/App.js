@@ -1,4 +1,5 @@
 import "./App.css";
+import { TodoProvider } from "./contexts/todo.context";
 import { UIProvider } from "./contexts/ui.context";
 import { UserProvider } from "./contexts/user.context";
 import Home from "./routes/home.component";
@@ -6,9 +7,11 @@ import Home from "./routes/home.component";
 function App() {
   return (
     <UserProvider>
-      <UIProvider>
-        <Home />
-      </UIProvider>
+      <TodoProvider>
+        <UIProvider>
+          <Home />
+        </UIProvider>
+      </TodoProvider>
     </UserProvider>
   );
 }

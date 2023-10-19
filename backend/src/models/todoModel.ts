@@ -8,28 +8,31 @@ export interface ITodo extends Document {
   user: Types.ObjectId;
 }
 
-const todoSchema = new Schema({
-  name: {
-    type: String,
-    required: [true, "A todo must have a description."],
+const todoSchema = new Schema(
+  {
+    name: {
+      type: String,
+      required: [true, "A todo must have a description."],
+    },
+    dateCreated: {
+      type: Date,
+      default: Date.now,
+    },
+    dateCompleted: {
+      type: Date,
+    },
+    complete: {
+      type: Boolean,
+      default: false,
+    },
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: [true, "Todo must belong to a user"],
+    },
   },
-  dateCreated: {
-    type: Date,
-    default: Date.now,
-  },
-  dateCompleted: {
-    type: Date,
-  },
-  complete: {
-    type: Boolean,
-    default: false,
-  },
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
-    required: [true, "Todo must belong to a user"],
-  },
-});
+  { toJSON: { virtuals: true }, toObject: { virtuals: true } }
+);
 
 todoSchema.index({ user: 1, name: 1 }, { unique: true } as IndexOptions);
 

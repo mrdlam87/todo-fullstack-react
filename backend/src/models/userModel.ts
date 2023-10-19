@@ -22,7 +22,6 @@ userSchema.virtual("todos", {
 
 userSchema.pre("find", function (next) {
   this.select("-__v");
-  this.set("toObject", { virtuals: true });
   next();
 });
 

@@ -8,9 +8,11 @@ import UserForm from "../components/user-form/user-form.component";
 import UserItem from "../components/user-item/user-item.component";
 import { UIContext } from "../contexts/ui.context";
 import { UserContext } from "../contexts/user.context";
+import { TodoContext } from "../contexts/todo.context";
 
 const Home = () => {
-  const { users, currentUser, currentUserTodos } = useContext(UserContext);
+  const { users, currentUser } = useContext(UserContext);
+  const { todos } = useContext(TodoContext);
   const { isModalOpen, setModal, formType, setFormType } =
     useContext(UIContext);
 
@@ -36,10 +38,7 @@ const Home = () => {
           {users && users.map((user) => <UserItem user={user} key={user.id} />)}
         </ListCard>
         <ListCard title="Todos" onAddClick={todoAddClick}>
-          {currentUserTodos &&
-            currentUserTodos.map((todo) => (
-              <TodoItem todo={todo} key={todo.id} />
-            ))}
+          {todos && todos.map((todo) => <TodoItem todo={todo} key={todo.id} />)}
         </ListCard>
       </div>
     </>

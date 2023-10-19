@@ -5,10 +5,12 @@ import { getFormattedDate } from "../../util/date";
 import CheckInput from "../check-input/check-input.component";
 import TodoForm from "../todo-form/todo-form.component";
 import "./todo-item.style.scss";
+import { TodoContext } from "../../contexts/todo.context";
 
 const TodoItem = ({ todo }) => {
   const { name, complete } = todo;
-  const { currentUser, updateUserTodo } = useContext(UserContext);
+  const { currentUser } = useContext(UserContext);
+  const { updateTodo } = useContext(TodoContext);
   const { setModal, setFormType } = useContext(UIContext);
 
   const onEditClick = () => {
@@ -20,7 +22,7 @@ const TodoItem = ({ todo }) => {
     // PUT
     todo.complete = !todo.complete;
     todo.dateCompleted = complete ? "" : getFormattedDate(new Date());
-    await updateUserTodo(todo);
+    await updateTodo(currentUser.id, todo);
   };
 
   let completedClassName = complete ? "completed" : "";

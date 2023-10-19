@@ -1,27 +1,17 @@
 import { useContext, useState } from "react";
 import { UIContext } from "../../contexts/ui.context";
-import { UserContext } from "../../contexts/user.context";
 import CheckInput from "../check-input/check-input.component";
 import DatePicker from "../date-picker/date-picker.component";
 import Form from "../form/form.component";
 import TextInput from "../text-input/text-input.component";
 import { getFormattedDate } from "../../util/date";
+import { TodoContext } from "../../contexts/todo.context";
 
 const TodoForm = ({ user, todo, edit }) => {
   const { setModal } = useContext(UIContext);
-  const { currentUserTodos, addUserTodo, updateUserTodo, deleteUserTodo } =
-    useContext(UserContext);
-
-  const lastIndex = () => {
-    const sortedTodos = [...currentUserTodos].sort((a, b) => a.id - b.id);
-
-    return sortedTodos.length === 0
-      ? 0
-      : sortedTodos[sortedTodos.length - 1].id;
-  };
+  const { addTodo, updateTodo, deleteTodo } = useContext(TodoContext);
 
   const [formData, setFormData] = useState({
-    id: todo ? todo.id : lastIndex() + 1,
     name: todo ? todo.name : "",
     dateCreated: todo ? todo.dateCreated : getFormattedDate(new Date()),
     dateCompleted: todo ? todo.dateCompleted : "",
@@ -31,7 +21,7 @@ const TodoForm = ({ user, todo, edit }) => {
   const onCancelHandler = async () => {
     // DELETE
     if (edit) {
-      deleteUserTodo(todo.id);
+      await deleteTodo(user.id, todo);
     }
 
     setModal(false);
@@ -40,13 +30,13 @@ const TodoForm = ({ user, todo, edit }) => {
     try {
       // POST
       if (!edit) {
-        await addUserTodo(formData);
+        await addTodo(user.id, formData);
       } else {
         // PUT
         todo.name = formData.name;
         todo.dateCompleted = formData.dateCompleted;
         todo.complete = formData.complete;
-        updateUserTodo(todo);
+        await updateTodo(user.id, todo);
       }
 
       setModal(false);
