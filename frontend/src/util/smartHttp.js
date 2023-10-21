@@ -39,6 +39,21 @@ const del = async (url) => {
 };
 
 const clearCache = (url) => {
+  const regexPattern = /(.+)(?:\/[A-Za-z0-9]+)$/;
+  const match = url.match(regexPattern);
+
+  if (match) {
+    const trimmedUrl = match[1];
+
+    cacheMap.forEach((_, key) => {
+      if (key.startsWith(trimmedUrl)) {
+        cacheMap.delete(key);
+      }
+    });
+  }
+};
+
+const clearCacheByBase = (url) => {
   const matches = url.match(/\/api\/([^/]+)/);
 
   if (matches) {
